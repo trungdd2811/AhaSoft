@@ -14,7 +14,7 @@ namespace Clients.Command.Service.Domain.Events
         public string OldName { get; }
         public string NewName { get; }
 
-        public ClientNameChangedDomainEvent(Guid id, string oldName, string newName) : base(id)
+        public ClientNameChangedDomainEvent(int id, string oldName, string newName) : base(id)
         {
             OldName = oldName;
             NewName = newName;

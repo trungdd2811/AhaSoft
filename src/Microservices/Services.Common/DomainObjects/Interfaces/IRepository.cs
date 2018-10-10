@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Services.Common.DomainObjects.Interfaces
 {
@@ -8,7 +9,8 @@ namespace Services.Common.DomainObjects.Interfaces
     {
         IUnitOfWork UnitOfWork { get; }
         T Add(T entity);
-        T Update(T entity);
-        int Delete(T entity);
+        void Update(T entity);
+        void Delete(T entity);
+        Task<bool> AnyAsync(int id);
     }
 }

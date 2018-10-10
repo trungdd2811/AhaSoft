@@ -2,33 +2,56 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Clients.Command.Service.Domain.AggregatesModel.Client;
+using Clients.Command.Service.Domain.AggregatesModel.ClientAggregate;
+using Microsoft.EntityFrameworkCore;
 using Services.Common.DomainObjects.Interfaces;
 
 namespace Clients.Command.Service.Infrastructure.Repositories
 {
     public class ClientRepository : IClientRepository
     {
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        private readonly ClientsContext _context;
 
+        public IUnitOfWork UnitOfWork
+        {
+            get
+            {
+                return _context;
+            }
+        }
+
+        public ClientRepository (ClientsContext dbContext)
+        {
+            _context = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        }
         public Client Add(Client entity)
         {
-            throw new NotImplementedException();
+            return _context.Clients.Add(entity).Entity;
         }
 
-        public int Delete(Client entity)
+        public void Delete(Client entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Deleted;
         }
 
-        public Task<Client> GetAsync(Guid id)
+        public async Task<Client> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var client = await _context.Clients.FindAsync(id);
+            if (client != null)
+            {
+                await _context.Entry(client).Reference(c => c.Address).LoadAsync();
+            }
+            return client;
         }
 
-        public Client Update(Client entity)
+        public void Update(Client entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public async Task<bool> AnyAsync(int id)
+        {
+            return await _context.Clients.AnyAsync(c => c.Id == id);
         }
     }
 }

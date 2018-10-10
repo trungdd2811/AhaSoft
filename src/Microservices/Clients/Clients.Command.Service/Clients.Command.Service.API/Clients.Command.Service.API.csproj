@@ -9,7 +9,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.0-beta1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Services.Common\Services.Common.csproj" />
+    <ProjectReference Include="..\..\Clients.Common\Clients.Common.csproj" />
+    <ProjectReference Include="..\Clients.Command.Service.Domain\Clients.Command.Service.Domain.csproj" />
+    <ProjectReference Include="..\Clients.Command.Service.Infrastructure\Clients.Command.Service.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

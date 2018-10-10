@@ -6,7 +6,7 @@ namespace Services.Common.DomainObjects.Interfaces
 {
     public interface IDomainEvent
     {
-        Guid Id { get; set; }
+        int Id { get; set; }
         string Version { get; set; }
     }
 }

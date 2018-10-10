@@ -7,9 +7,9 @@ namespace Services.Common.DomainObjects
 {
     public class Entity
     {
-        Guid _id;
+        int _id;
         int? _requestedHashCode;
-        public virtual Guid Id
+        public virtual int Id
         {
             get { return _id; }
             protected set { _id = value; }
@@ -37,7 +37,7 @@ namespace Services.Common.DomainObjects
         #region Operators customization
         public bool IsTransient()
         {
-            return this.Id == default(Guid);
+            return this.Id == default(int);
         }
         public override bool Equals(object obj)
         {
