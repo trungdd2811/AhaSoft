@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clients.Command.Service.Infrastructure.Migrations
 {
     [DbContext(typeof(ClientsContext))]
-    [Migration("20181010083614_initial")]
+    [Migration("20181011095424_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.0-preview2-35157")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -27,9 +27,13 @@ namespace Clients.Command.Service.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedDate");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("PhoneNumber");
+
+                    b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -40,7 +44,7 @@ namespace Clients.Command.Service.Infrastructure.Migrations
                 {
                     b.OwnsOne("Services.Common.DomainObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<int?>("ClientId")
+                            b1.Property<int>("ClientId")
                                 .ValueGeneratedOnAdd()
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -53,6 +57,8 @@ namespace Clients.Command.Service.Infrastructure.Migrations
                             b1.Property<string>("Street");
 
                             b1.Property<string>("ZipCode");
+
+                            b1.HasKey("ClientId");
 
                             b1.ToTable("Clients");
 

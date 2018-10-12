@@ -11,34 +11,52 @@ namespace Clients.Command.Service.Domain.AggregatesModel.ClientAggregate
     {
         #region constructors
         private Client() { }
-        public Client(string name, string phoneNumber,
-            Address address)
+        public Client(int id, string name, string phoneNumber,
+            Address address, DateTime createdDate, DateTime updatedDate)
         {
-            Name = name;
+            Id = id;
+            _name = name;
             PhoneNumber = phoneNumber;
-            if (address != null) 
+            CreatedDate = createdDate;
+            UpdatedDate = updatedDate;
+            if (address != null)
                 Address = address;
+        }
+        public Client(string name, string phoneNumber,
+           Address address, DateTime createdDate, DateTime updatedDate) : this(default(int), name, phoneNumber, address, createdDate, updatedDate)
+        {
+
         }
         #endregion
 
         #region properties
-        public string Name { get; private set; }
-        public string PhoneNumber { get; private set; }
-        public Address Address { get; private set; }
-        #endregion
-
-        #region methods
-        public void SetName(string newName)
+        private string _name = string.Empty;
+        public string Name
         {
-            #region add domain event
-            //Add to domain events collection
-            //to be raised/dispatched when comitting changes into database
-            ClientNameChangedDomainEvent evt = new ClientNameChangedDomainEvent(Id, Name, newName);
-            AddDomainEvents(evt);
-            #endregion
+            get { return _name; }
+            set
+            {
+                #region add domain event
+                //Add to domain events collection
+                //to be raised/dispatched when comitting changes into database
+                try
+                {
+                    ClientNameChangedDomainEvent evt = new ClientNameChangedDomainEvent(Id, _name, value);
+                    AddDomainEvents(evt);
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+                #endregion
 
-            Name = newName;
+                _name = value;
+            }
         }
+        public string PhoneNumber { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public Address Address { get; set; }
         #endregion
 
     }

@@ -11,8 +11,8 @@ namespace Clients.Command.Service.Domain.Events
     /// </summary>
     public class ClientNameChangedDomainEvent : DomainEvent, INotification
     {
-        public string OldName { get; }
-        public string NewName { get; }
+        public string OldName { get; private set; }
+        public string NewName { get; private set; }
 
         public ClientNameChangedDomainEvent(int id, string oldName, string newName) : base(id)
         {

@@ -8,10 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using Clients.Command.Service.Domain.AggregatesModel.ClientAggregate;
 using Clients.Command.Service.Infrastructure;
 using Services.Common.DomainObjects.Interfaces;
+using Clients.Command.Service.API.Commands.Clients.Dto;
+using Clients.Command.Service.API.Commands.Clients;
+using Clients.Command.Service.API.Commands.Clients.CommandHandlers;
+using Services.Common.Exceptions;
+using Services.Common.Commands;
 
 namespace Clients.Command.Service.API.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class ClientsController : ControllerBase
     {
@@ -23,58 +29,74 @@ namespace Clients.Command.Service.API.Controllers
             _unitOfWork = _repo.UnitOfWork;
         }
 
-        // PUT: api/Clients/5
+        // POST: api/v1/Clients/5
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] Client client)
+        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] AlterClientCommandDto cmdDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != client.Id)
+            if (id != cmdDTO.Id)
             {
                 return BadRequest();
             }
 
-            _repo.Update(client);
-
-            try
-            {
-                await _unitOfWork.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                var exist = await ClientExists(id);
-                if (!exist)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var commandResult = await new AlterClientCmdHandler()
+                                        .Invoke(cmdDTO, new AlterClientCmd(),_repo);
+            if (!commandResult.IsOK)
+                return new ErrorResponse(commandResult).GetActionResult();
+                
+            return Ok(cmdDTO);
         }
 
-        // POST: api/Clients
+        // POST: api/v1/Clients
+        /// <summary>
+        /// Creates a Client.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST api/v1/Clients
+        ///     {
+        ///        "name": "Client",
+        ///        "phoneNumber": "123477",
+        ///        "address": {
+        ///                "street": "no trang long",
+        ///                "city": "hcm",
+        ///                "state": "hcm",
+        ///                "country": "vn",
+        ///                "zipCode": "08"
+        ///                }
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>A newly created Client</returns>
+        /// <response code="200">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>                 
         [HttpPost]
-        public async Task<IActionResult> PostClient([FromBody] Client client)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> PostClient([FromBody] CreateClientCommandDto cmdDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _repo.Add(client);
-            await _unitOfWork.SaveChangesAsync();
+            var commandResult = await new CreateClientCmdHandler()
+                                        .Invoke(cmdDTO, new CreateClientCmd(), _repo);
+            if (!commandResult.IsOK)
+                return new ErrorResponse(commandResult).GetActionResult();
 
-            return Ok(client);
+            return Ok(cmdDTO);
         }
 
-        // DELETE: api/Clients/5
+        // DELETE: api/v1/Clients/5
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClient([FromRoute] int id)
         {
@@ -95,9 +117,8 @@ namespace Clients.Command.Service.API.Controllers
             return Ok(client);
         }
 
-        private async Task<bool> ClientExists(int id)
-        {
-            return await _repo.AnyAsync(id);
-        }
+        #region private methods
+
+        #endregion
     }
 }

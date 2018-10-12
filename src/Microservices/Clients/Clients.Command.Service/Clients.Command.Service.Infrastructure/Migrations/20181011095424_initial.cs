@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Clients.Command.Service.Infrastructure.Migrations
@@ -15,6 +16,8 @@ namespace Clients.Command.Service.Infrastructure.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: false),
                     Address_Street = table.Column<string>(nullable: true),
                     Address_City = table.Column<string>(nullable: true),
                     Address_State = table.Column<string>(nullable: true),
