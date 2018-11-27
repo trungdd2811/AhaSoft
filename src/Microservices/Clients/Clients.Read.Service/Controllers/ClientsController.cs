@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Clients.Read.Service.Infrastructure.ClientQueries;
 using Microsoft.Extensions.Configuration;
+using Services.Common.DomainObjects.Enum;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Clients.Read.Service.Controllers
 {
+    [Authorize(Policy = nameof(Policies.NormalUsers))]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]

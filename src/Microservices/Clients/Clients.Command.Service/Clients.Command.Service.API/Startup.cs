@@ -61,6 +61,8 @@ namespace Clients.Command.Service.API
 
             app.UseDefaultFiles();
 
+            app.UseAuthentication();
+
             app.UseCustomSwagger();
 
             app.UseMvc();

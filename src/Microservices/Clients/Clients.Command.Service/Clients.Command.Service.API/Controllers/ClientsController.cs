@@ -8,14 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using Clients.Command.Service.Domain.AggregatesModel.ClientAggregate;
 using Clients.Command.Service.Infrastructure;
 using Services.Common.DomainObjects.Interfaces;
+using Services.Common.DomainObjects.Enum;
 using Clients.Command.Service.API.Commands.Clients.Dto;
 using Clients.Command.Service.API.Commands.Clients;
 using Clients.Command.Service.API.Commands.Clients.CommandHandlers;
 using Services.Common.Exceptions;
 using Services.Common.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Clients.Command.Service.API.Controllers
 {
+    [Authorize(Policy = nameof(Policies.AdvancedUsers))]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
