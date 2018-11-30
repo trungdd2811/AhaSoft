@@ -11,103 +11,112 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 // const DashboardPlugin = require('webpack-dashboard/plugin')
 
 module.exports = {
-  mode: 'development',
-  entry: './src/app.js',
-  output: {
-    filename: 'bundle.js',
-    publicPath: '/',
-    path: path.resolve(__dirname, './dist')    
-  },
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  },
-  devtool: 'source-map',
-  performance: {
-    hints: false
-    // hints: 'warning'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
-        test: /\.(s*)css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              url: false,
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              url: false,
-              sourceMap: true 
-            }
-          },
-          {
-            loader: 'sass-resources-loader',
-            options: {
-              url: false,
-              sourceMap: true,
-              resources: './src/template/_variables.scss'
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'images/[hash].[ext]'
-            }
-          }
-        ]
-      }
-    ]
-  },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+    mode: 'development',
+    entry: './src/app.js',
+    output: {
+        filename: 'bundle.js',
+        publicPath: '/',
+        // eslint-disable-next-line no-undef
+        path: path.resolve(__dirname, './dist')    
     },
-    extensions: ['*', '.js', '.vue', '.json']
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    }),
-    new CopyWebpackPlugin(
-      [
-        { from: './src/template/', to: './template' }
-      ],
-      {
-        copyUnmodified: false,
-        debug: false
-      }
-    ),
-    new CleanWebpackPlugin(['dist']),
-    new webpack.HotModuleReplacementPlugin(),
-    new VueLoaderPlugin()
+    devServer: {
+        contentBase: './dist',
+        hot: true
+    },
+    devtool: 'source-map',
+    performance: {
+        hints: false
+    // hints: 'warning'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            {
+                test: /\.(js|vue)$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    failOnError: true,
+                }
+            },
+            {
+                test: /\.(s*)css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            url: false,
+                            sourceMap: true 
+                        }
+                    },
+                    {
+                        loader: 'sass-resources-loader',
+                        options: {
+                            url: false,
+                            sourceMap: true,
+                            resources: './src/template/_variables.scss'
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'images/[hash].[ext]'
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        },
+        extensions: ['*', '.js', '.vue', '.json']
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css'
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
+        new CopyWebpackPlugin(
+            [
+                { from: './src/template/', to: './template' }
+            ],
+            {
+                copyUnmodified: false,
+                debug: false
+            }
+        ),
+        new CleanWebpackPlugin(['dist']),
+        new webpack.HotModuleReplacementPlugin(),
+        new VueLoaderPlugin()
     // new BundleAnalyzerPlugin()
     // new DashboardPlugin() // UI command so great
-  ],
-  optimization: {
-    minimizer: [new UglifyJsPlugin({
-      cache: false,
-      parallel: true
-    })],
+    ],
+    optimization: {
+        minimizer: [new UglifyJsPlugin({
+            cache: false,
+            parallel: true
+        })],
     // splitChunks: {
     //   chunks: 'all',
     //   cacheGroups: {
@@ -124,5 +133,5 @@ module.exports = {
     //     }
     //   }
     // }
-  }
+    }
 }

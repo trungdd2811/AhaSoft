@@ -58,10 +58,11 @@
 
 <script>
 import sales_today from './../../components/sales-today/sales-today.vue'
-import system_notice from './../../components/system-noticestem-notice.vue'
+import system_notice from './../../components/system-notice/system-notice.vue'
 import { mapGetters } from 'vuex'
 
 export default {
+
     components: {
         'sales-today': sales_today,
         'system-notice': system_notice
