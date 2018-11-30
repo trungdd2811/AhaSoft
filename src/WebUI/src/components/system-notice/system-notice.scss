@@ -1,0 +1,29 @@
+.row-info {
+  ul {
+    li {
+      &:nth-of-type(1) h2:before {
+        background-color: #efcd67;
+      }
+      &:nth-of-type(2) h2:before {
+        background-color: #49b9e3;
+      }
+      &:nth-of-type(3) h2:before {
+        background-color: #f3638b;
+      }
+      h2 {
+        text-transform: uppercase;
+        &:before {
+          content: " ";
+          display: inline-block;
+          width: 12px;
+          height: 38px;
+          box-sizing: border-box;
+          margin-right: 10px;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+}

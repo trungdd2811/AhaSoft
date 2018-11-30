@@ -1,0 +1,151 @@
+.row {
+	display: block;
+}
+a.dropdown-item {
+	&.active, &:active, &:focus {
+		border: none;
+		background-color: transparent;
+		text-decoration: none;
+	}
+}
+button:focus {
+	box-shadow: none !important;
+}
+.clearfix {
+	&:before {
+		display: table;
+    content: " ";
+	}
+	&:after {
+		content: "";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    font-size: 0;
+	}
+}
+#header {
+	.modal-dialog {
+		max-width: 800px;
+		width: auto;
+		.modal-content {
+			border: 0;
+			.modal-body {
+				form {
+					margin-bottom: 60px;
+				}
+			}
+			.modal-footer {
+				margin: 10px auto;
+				background: none;
+				flex-direction: row-reverse;
+				justify-content: center;
+				.btn {
+					margin-left: 0;
+					color: #fff;
+					display: block;
+					width: 120px;
+					height: 40px;
+					line-height: 40px;
+					text-align: center;
+					border-radius: 5px;
+					background-color: #3499db !important;
+					padding: 0;
+					&.btn-primary {
+						margin-right: 5px !important;
+					}
+					&.btn-secondary {
+						background: #6fbad4 !important;
+					}
+				}
+			}
+		}
+	}
+	#top-bar .menu-user {
+		dd {
+			.btn {
+				background: unset;
+				margin: 0;
+				&:hover {
+					transform: rotate(360deg);
+					-webkit-transform: rotate(360deg);
+				}
+				img {
+					margin-right: 3px;
+					transition: all .5s ease;
+				}
+			}
+		}
+		#notice-click {
+			margin-bottom: 50px;
+			.modal-body {
+				.notice-click-box {
+					.btn {
+						color: #666;
+						font-size: 13px;
+						font-weight: 500;
+					}
+				}
+			}
+		}
+		#waiting-list {
+			.modal-body {
+				form {
+					margin-bottom: 20px;
+				}
+			}
+		}
+		.lang a {
+			display: block;
+			img {
+				display: block;
+				width: 28px;
+				border: 1px solid #eee;
+			}
+		}
+		#myaccount-click {
+			margin: 0 !important;
+			&:before {
+				content: url('template/images/common/user.png');
+			}
+			&>.btn {
+				margin-top: -3px;
+				margin-left: 2px;
+				background: none;
+				color: $gray-666;
+				font-size: 13px;
+				font-weight: 500;
+				&.dropdown-toggle::after {
+					vertical-align: 0.15em;
+				}
+			}
+			.dropdown-menu {
+				padding-top: 0;
+				.dropdown-header {
+					background: #6fbad4;
+					color: white;
+				}
+			}
+		}
+		.logout {
+			&>.btn {
+				width: 80px;
+				padding: 3px 10px;
+				border-radius: 20px;
+				background-color: #62cccf;
+				font-size: 13px;
+				font-weight: 600;
+				text-align: center;
+				color: #fff;
+			}
+		}
+	}
+}
+#notice-click___BV_modal_footer_ {
+	background: red;
+	.btn {
+		display: none;
+	}
+}

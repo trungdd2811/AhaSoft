@@ -1,0 +1,48 @@
+.row-sales {
+  ul {
+    li {
+      &:nth-of-type(1) h2:before {
+        border: 3px solid #ef6088;
+      }
+      &:nth-of-type(2) h2:before {
+        border: 3px solid #7c79b6;
+      }
+      &:nth-of-type(3) h2:before {
+        border: 3px solid #57c386;
+      }
+      h2 {
+        text-transform: uppercase;
+        &:before {
+          content: " ";
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          -ms-transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          -o-transform: rotate(45deg);
+          transform: rotate(45deg);
+          box-sizing: border-box;
+          background-color: #fff;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  .box {
+    dl{
+      &.sub-title {
+        display: inline-block;
+      }
+      &.value {
+        float: right;
+        dd {
+          text-align: right;
+        }
+      }
+    }
+    .total {
+      clear: both;
+    }
+  }
+}
