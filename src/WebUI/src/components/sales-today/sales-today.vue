@@ -1,13 +1,17 @@
 <template>
   <li>
-    <slot name="head-title"></slot>
+    <slot name="head-title"/>
     <div class="box">
-      <slot name="sub-title"></slot>
+      <slot name="sub-title"/>
       <dl class="value">
-        <dd v-for="row in data.values" :key="row.index">{{ row.value }}</dd>
+        <dd 
+          v-for="row in data.values" 
+          :key="row.index">{{ row.value }}</dd>
       </dl>
-      <p class="total" v-if="data.total !== ''">
-        <slot name="end-title"></slot><strong>{{ data.total }}</strong>
+      <p 
+        v-if="data.total !== ''" 
+        class="total">
+        <slot name="end-title"/><strong>{{ data.total }}</strong>
       </p>
     </div>
   </li>
@@ -15,7 +19,12 @@
 
 <script>
 export default {
-    props: ['data']
+    props: {
+        data: {
+            type: Object,
+            default: null,
+        }
+    }
 }
 </script>
 

@@ -1,7 +1,9 @@
 <template>
   <!-- Footer -->
   <footer>
-    <h2 class="logo2"><a href="index.html"><img src="template/images/common/logo2.png" alt="Ahasoft"></a></h2>
+    <h2 class="logo2"><a href="index.html"><img 
+      src="template/images/common/logo2.png" 
+      alt="Ahasoft"></a></h2>
     <p>© Copyright 2005 by AHASOFT All Right Reserved.</p>
   </footer>
 </template>

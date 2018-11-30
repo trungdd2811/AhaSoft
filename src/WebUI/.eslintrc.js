@@ -6,7 +6,7 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:vue/base"
+        "plugin:vue/recommended"
     ],
     "parserOptions": {
         "parser": "babel-eslint",
@@ -32,6 +32,9 @@ module.exports = {
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "no-empty-function": "error",
+        "no-void": "error",
+        "init-declarations": ["error", "always"]
     }
 };

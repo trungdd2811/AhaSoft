@@ -1,10 +1,12 @@
 <template>
   <li>
-    <h2><slot></slot></h2>
+    <h2><slot/></h2>
     <div class="box">
       <dl>
-        <dt class="hide"></dt>
-        <dd v-for="row in data.contents" :key="row.index">{{ row.content }}</dd>
+        <dt class="hide"/>
+        <dd 
+          v-for="row in data.contents" 
+          :key="row.index">{{ row.content }}</dd>
       </dl>
     </div>
   </li>
@@ -13,7 +15,13 @@
 <script>
 
 export default {
-    props: ['data']
+    // eslint-disable-next-line vue/require-prop-types
+    props: {
+        data: {
+            type: Object,
+            default: null,
+        }
+    }
 }
 </script>
 
