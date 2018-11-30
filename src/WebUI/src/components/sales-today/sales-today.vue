@@ -14,10 +14,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
-  props: ['data']
+    props: ['data']
 }
 </script>
 

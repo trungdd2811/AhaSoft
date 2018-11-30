@@ -460,41 +460,41 @@
 
 <script>
 import bModal from 'bootstrap-vue/es/components/modal/modal'
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
-  components: {
-    'b-modal': bModal
-	},
-	computed: {
-		// notice
-    ...mapGetters('header_block', {
-      notices: 'getNotices'
-		}),
-		// language
-		otherLocale() {
-			let other =  'kr'
-			if (this.$i18n.locale == 'kr') other = 'en'
-			return other
-		}
-	},
-	methods: {
-		// notice
-		addNoticesToView (e) {
-			e.preventDefault()
-      this.$store.dispatch('header_block/addNoticesToView')
-		},
-		deleteNoticesFromView (e){
-			e.preventDefault()
-			this.$store.dispatch('header_block/deleteNoticesFromView')
-		},
-		// language
-		switchLocale (e){
-			e.preventDefault()
-			if(this.$i18n.locale == 'en') this.$i18n.locale = 'kr'
-			else this.$i18n.locale = 'en'
-		}
-	}
+    components: {
+        'b-modal': bModal
+    },
+    computed: {
+        // notice
+        ...mapGetters('header_block', {
+            notices: 'getNotices'
+        }),
+        // language
+        otherLocale() {
+            let other =  'kr'
+            if (this.$i18n.locale == 'kr') other = 'en'
+            return other
+        }
+    },
+    methods: {
+        // notice
+        addNoticesToView (e) {
+            e.preventDefault()
+            this.$store.dispatch('header_block/addNoticesToView')
+        },
+        deleteNoticesFromView (e){
+            e.preventDefault()
+            this.$store.dispatch('header_block/deleteNoticesFromView')
+        },
+        // language
+        switchLocale (e){
+            e.preventDefault()
+            if(this.$i18n.locale == 'en') this.$i18n.locale = 'kr'
+            else this.$i18n.locale = 'en'
+        }
+    }
 }
 
 </script>

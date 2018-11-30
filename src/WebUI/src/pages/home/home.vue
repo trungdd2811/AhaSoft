@@ -51,24 +51,24 @@
 <script>
 import sales_today from './../../components/sales-today/sales-today.vue'
 import system_notice from './../../components/system-notice/system-notice.vue'
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
-	computed: {
-		// notice
-		...mapGetters('page_home', {
-			sales_today_data: 'getTodaySales',
-			booking_today_data: 'getTodayBooking',
-			client_today_data: 'getTodayClient',
-			system_notice_data: 'getNoticeSystem',
-			headquater_notice_data: 'getNoticeHeadquater',
-			salon_qa_data: 'getSalonQA'
-		})
-	},
-  components: {
-		'sales-today': sales_today,
-    'system-notice': system_notice
-  }
+    computed: {
+        // notice
+        ...mapGetters('page_home', {
+            sales_today_data: 'getTodaySales',
+            booking_today_data: 'getTodayBooking',
+            client_today_data: 'getTodayClient',
+            system_notice_data: 'getNoticeSystem',
+            headquater_notice_data: 'getNoticeHeadquater',
+            salon_qa_data: 'getSalonQA'
+        })
+    },
+    components: {
+        'sales-today': sales_today,
+        'system-notice': system_notice
+    }
 }
 </script>
 

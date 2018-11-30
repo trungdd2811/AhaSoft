@@ -23,9 +23,9 @@ import './template/_custom.scss'
 
 // Vue Instanse
 new Vue({
-  el: '#app',
-  router,
-  i18n,
-  store,
-  render: h => h(app)
+    el: '#app',
+    router,
+    i18n,
+    store,
+    render: h => h(app)
 })
