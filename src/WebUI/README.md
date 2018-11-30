@@ -5,6 +5,11 @@
 npm install
 ```
 
+## Run eslint to verify all files
+```
+./node_modules/.bin/eslint  --ext .js,.vue src
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run dev
